@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d1725"><meta name="description" content="地牢夺宝：探索迷雾遗迹、收集宝石，智取守卫并安全撤离。支持手机和电脑，含教程、精选关卡、千座遗迹和随机地图。"><meta property="og:title" content="地牢夺宝"><meta property="og:description" content="一场关于路线、勇气与贪心的地牢冒险。打开网页就能玩。"><title>地牢夺宝 · 网页游戏</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="mobile.css"></head>
+<body>
+<div class="stars-bg"></div><div class="site">
+<header class="top"><div class="identity"><span class="crest">✦</span><div><b>地牢夺宝</b><small>一场关于路线、勇气与贪心的地牢冒险</small></div></div>
+<div class="top-actions"><button id="jumpLevels" class="ghost mobile-jump">选关</button><button id="help" class="ghost">玩法说明</button><button id="sound" class="ghost" aria-label="切换音效">♪ 音效开启</button></div></header>
+<section class="intro"><div><span class="pill">浏览器游戏 · 自动保存</span><h1>每一步，都值得深思。</h1><p>深入遗迹，收集宝石，带着战利品走到出口。你能拿走多少，又能否活着出来？</p></div>
+<div class="intro-stat"><b id="doneCount">0</b><small>已征服的遗迹</small><span class="divider"></span><b id="bestCount">0</b><small>累计挑战次数</small></div></section>
+<main class="game-grid"><div class="play-panel">
+<div class="play-head"><div><span class="tag" id="modeTag">教程</span><h2 id="levelTitle">初入遗迹</h2></div><span id="stepStatus">准备进入地牢</span></div>
+<div class="canvas-frame"><canvas id="board" width="748" height="484" aria-label="可操作的地牢地图"></canvas><span class="view-hint">视角跟随角色 · 黑暗区域尚未探索</span></div>
+<div class="hud-row"><div><small>宝石</small><strong id="gems">0/0</strong></div><div><small>生命</small><strong id="hearts">♥ ♥ ♥</strong></div><div><small>剩余回合</small><strong id="turns">—</strong></div><div><small>钥匙</small><strong id="keys">0</strong></div><div><small>炸弹</small><strong id="bombs">0</strong></div></div>
+<div class="play-bottom"><div class="key-guide"><span><kbd>W A S D</kbd> / <kbd>↑←↓→</kbd> 移动</span><span><kbd>空格</kbd> 炸弹</span><span><kbd>Q</kbd> 等待</span><span><kbd>R</kbd> 重试</span></div>
+<div class="play-buttons"><button id="restart" class="ghost">↻ 重来</button><button id="next" class="primary">下一关 →</button></div></div>
+<div class="touch-pad"><div class="cross"><button data-action="up" aria-label="向上移动">↑</button><div><button data-action="left" aria-label="向左移动">←</button><button data-action="down" aria-label="向下移动">↓</button><button data-action="right" aria-label="向右移动">→</button></div></div><div class="touch-actions"><button data-action="bomb">💣 炸弹</button><button data-action="wait">◷ 等待</button></div></div>
+</div>
+<aside class="right-panel"><div class="panel-card">
+<div class="eyebrow">冒险任务</div><h3 id="mission">找到出口</h3><p id="description">收集宝石并安全撤离。</p><div class="tip" id="tip">一枚宝石也能撤离，带走更多会得更高分。</div>
+<div class="legend"><span>🟡 玩家</span><span>◆ 宝石</span><span>▣ 出口</span><span>⚿ 钥匙</span><span>▤ 锁门</span><span>▦ 可炸墙</span><span>♟ 守卫</span></div></div>
+<div class="panel-card map-card"><div class="mini-title"><span>探索记录</span><small id="fogLabel">未知区域不会显示</small></div><canvas id="minimap" width="288" height="188" aria-label="已探索的地图"></canvas><p>灰暗区域需要亲自靠近探索。守卫会移动，别轻信旧情报。</p></div>
+<div class="panel-card history-card"><div class="eyebrow">冒险进度</div><p id="categoryProgress">完成关卡会自动记录最高成绩。</p><div class="progress"><div id="progressBar"></div></div><button id="continue" class="wide ghost">继续上次冒险</button><button id="browse" class="wide ghost">选择其他关卡 ↓</button></div>
+</aside></main>
+<section class="library" id="library"><div class="library-title"><div><span class="eyebrow">探索世界</span><h2>选择你的冒险</h2><p>教程、精选挑战、千座遗迹，或每次都不一样的新地图。</p></div><span class="save-note">✓ 进度保存在当前浏览器</span></div>
+<div class="tabs"><button class="active" data-tab="tutorial">教学关卡 <small>5</small></button><button data-tab="training">精选关卡 <small>30</small></button><button data-tab="archive">遗迹图鉴 <small>1200</small></button><button data-tab="unplayed">随机未玩关卡</button><button data-tab="random">随机地图</button></div>
+<div id="libraryContent" class="library-content"></div>
+</section>
+<footer><span>地牢夺宝 · 支持手机与电脑 · 键盘和触屏均可游玩</span><button id="clearSave" class="link-button">清除游玩记录</button></footer>
+</div>
+<div class="modal hidden" id="modal"><div class="modal-backdrop"></div><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalHeading"><div class="modal-icon" id="modalIcon">✦</div><div class="eyebrow" id="modalLabel">冒险提示</div><h2 id="modalHeading">欢迎回来</h2><p id="modalBody"></p><div id="modalStats" class="modal-stats"></div><div class="modal-buttons"><button id="modalSecondary" class="ghost">返回</button><button id="modalPrimary" class="primary">继续 →</button></div></div></div>
+<script src="engine.js"></script><script src="generator.js"></script><script src="levels.js"></script><script src="app.js"></script>
+</body></html>
