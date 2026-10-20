@@ -1,0 +1,38 @@
+/* Exploration atlas shared by desktop and touch players */
+.overview-overlay[hidden]{display:none!important}
+.overview-overlay{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:18px;background:#06121ddf;backdrop-filter:blur(9px)}
+.overview-card{width:min(950px,100%);max-height:calc(100dvh - 36px);min-height:320px;display:flex;flex-direction:column;overflow:hidden;background:#132939;border:1px solid #568475;border-radius:16px;box-shadow:0 32px 90px #000b}
+.overview-header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 19px 13px;border-bottom:1px solid #385463}
+.overview-header strong{font-size:19px;color:#edfff9}
+.overview-header p{font-size:11px;line-height:1.7;color:#9fbec4;margin:6px 0 0}
+.overview-close{padding:9px 13px;border-radius:9px;background:#244657;color:#e8fff4;border:1px solid #55747b;min-height:39px;white-space:nowrap;flex-shrink:0}
+.overview-stage{flex:1;min-height:170px;padding:12px 13px 0;background:linear-gradient(150deg,#102537,#0a1926)}
+.overview-stage canvas{display:block;width:100%;height:min(59dvh,550px);max-height:550px;background:#081723;border-radius:10px;border:1px solid #304854;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.overview-stage canvas:active{cursor:grabbing}
+.overview-toolbar{padding:12px 19px 15px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.overview-legend{color:#b2c8d2;font-size:11px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 13px}
+.overview-legend span{display:inline-flex;align-items:center;gap:5px}
+.overview-legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.overview-tools{display:flex;align-items:center;gap:8px}
+.overview-tools button{background:#244958;border:1px solid #426f7d;color:#e9fff4;border-radius:8px;min-width:37px;min-height:37px;font-size:17px}
+.overview-tools #mapReset{font-size:12px;padding:5px 12px;min-width:58px}
+.overview-note{font-size:11px;color:#8fb2b8;text-align:center;padding:0 12px 13px}
+.play-buttons #openMap{white-space:nowrap}
+@media(max-width:800px){
+ .overview-overlay{padding:7px}
+ .overview-card{max-height:calc(100dvh - 14px);border-radius:13px}
+ .overview-header{padding:12px}
+ .overview-header strong{font-size:16px}
+ .overview-header p{font-size:10px}
+ .overview-stage{padding:8px 9px 0}
+ .overview-stage canvas{height:min(59dvh,570px)}
+ .overview-toolbar{padding:10px 12px;gap:10px}
+ .overview-note{padding-bottom:12px}
+ .overview-tools button{min-width:42px;min-height:42px}
+ .play-buttons #openMap{font-size:12px}
+}
+@media(max-width:390px){
+ .play-buttons button{padding:8px 8px}
+ .overview-legend{gap:6px 9px;font-size:10px}
+ .overview-tools{margin-left:auto}
+}

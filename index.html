@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0d1725"><meta name="description" content="地牢夺宝：探索迷雾遗迹、收集宝石，智取守卫并安全撤离。支持手机和电脑，含教程、精选关卡、千座遗迹和随机地图。"><meta property="og:title" content="地牢夺宝"><meta property="og:description" content="一场关于路线、勇气与贪心的地牢冒险。打开网页就能玩。"><title>地牢夺宝 · 网页游戏</title>
-<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="mobile.css"></head>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="mobile.css"><link rel="stylesheet" href="map-overview.css"></head>
 <body>
 <div class="stars-bg"></div><div class="site">
 <header class="top"><div class="identity"><span class="crest">✦</span><div><b>地牢夺宝</b><small>一场关于路线、勇气与贪心的地牢冒险</small></div></div>
@@ -13,7 +13,7 @@
 <div class="canvas-frame"><canvas id="board" width="748" height="484" aria-label="可操作的地牢地图"></canvas><span class="view-hint">视角跟随角色 · 黑暗区域尚未探索</span></div>
 <div class="hud-row"><div><small>宝石</small><strong id="gems">0/0</strong></div><div><small>生命</small><strong id="hearts">♥ ♥ ♥</strong></div><div><small>剩余回合</small><strong id="turns">—</strong></div><div><small>钥匙</small><strong id="keys">0</strong></div><div><small>炸弹</small><strong id="bombs">0</strong></div></div>
 <div class="play-bottom"><div class="key-guide"><span><kbd>W A S D</kbd> / <kbd>↑←↓→</kbd> 移动</span><span><kbd>空格</kbd> 炸弹</span><span><kbd>Q</kbd> 等待</span><span><kbd>R</kbd> 重试</span></div>
-<div class="play-buttons"><button id="restart" class="ghost">↻ 重来</button><button id="next" class="primary">下一关 →</button></div></div>
+<div class="play-buttons"><button id="restart" class="ghost">↻ 重来</button><button id="openMap" class="ghost" aria-haspopup="dialog" title="查看已探索的完整地图">▦ 地图总览</button><button id="next" class="primary">下一关 →</button></div></div>
 <div class="touch-pad"><div class="cross"><button data-action="up" aria-label="向上移动">↑</button><div><button data-action="left" aria-label="向左移动">←</button><button data-action="down" aria-label="向下移动">↓</button><button data-action="right" aria-label="向右移动">→</button></div></div><div class="touch-actions"><button data-action="bomb">💣 炸弹</button><button data-action="wait">◷ 等待</button></div></div>
 </div>
 <aside class="right-panel"><div class="panel-card">
@@ -28,6 +28,7 @@
 </section>
 <footer><span>地牢夺宝 · 支持手机与电脑 · 键盘和触屏均可游玩</span><button id="clearSave" class="link-button">清除游玩记录</button></footer>
 </div>
+<div class="overview-overlay" id="mapOverlay" hidden><section class="overview-card" role="dialog" aria-modal="true" aria-labelledby="mapHeading"><div class="overview-header"><div><strong id="mapHeading">地图总览</strong><p>可以查看已探索的区域；未知区域仍然隐藏，查看地图不消耗回合。</p></div><button id="mapClose" class="overview-close" aria-label="关闭地图">关闭 ✕</button></div><div class="overview-stage"><canvas id="mapOverviewCanvas" width="780" height="490" aria-label="已探索的完整地牢地图，可拖动与缩放"></canvas></div><div class="overview-toolbar"><div class="overview-legend"><span><i style="background:#98ffe0"></i>玩家</span><span><i style="background:#f5d17c"></i>宝石</span><span><i style="background:#247e69"></i>出口</span><span><i style="background:#5a7180"></i>墙体</span><span><i style="background:#091d2c"></i>未知</span></div><div class="overview-tools"><button id="mapZoomOut" aria-label="缩小地图">−</button><button id="mapZoomIn" aria-label="放大地图">＋</button><button id="mapReset">适应屏幕</button></div></div><div class="overview-note">拖动地图查看各处 · 鼠标滚轮或双指缩放 · 按 Esc 关闭</div></section></div>
 <div class="modal hidden" id="modal"><div class="modal-backdrop"></div><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalHeading"><div class="modal-icon" id="modalIcon">✦</div><div class="eyebrow" id="modalLabel">冒险提示</div><h2 id="modalHeading">欢迎回来</h2><p id="modalBody"></p><div id="modalStats" class="modal-stats"></div><div class="modal-buttons"><button id="modalSecondary" class="ghost">返回</button><button id="modalPrimary" class="primary">继续 →</button></div></div></div>
-<script src="engine.js"></script><script src="generator.js"></script><script src="levels.js"></script><script src="app.js"></script>
+<script src="engine.js"></script><script src="generator.js"></script><script src="levels.js"></script><script src="map-overview.js"></script><script src="app.js"></script>
 </body></html>

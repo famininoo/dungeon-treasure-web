@@ -2,6 +2,7 @@
 (()=>{
 const D=window.TreasureLevels,Core=window.DungeonCore,Gen=window.TreasureGenerator;
 const $=id=>document.getElementById(id),KEY="treasure-adventure-v1";
+const mapOverview=window.TreasureMap;
 const collections={tutorial:D.tutorial,training:D.training,archive:D.archive};
 const byId=new Map([...D.tutorial,...D.training,...D.archive].map(x=>[x.id,x]));
 const categories=D.categories;
@@ -36,7 +37,7 @@ function closeModal(){modalOpen=false;$("modal").classList.add("hidden")}
 function info(){
  modal({icon:"✧",label:"玩法说明",title:"带着宝石走出地牢",
  text:"用 WASD 或方向键移动，每个动作消耗一回合。\n拾取宝石，带至少一颗宝石走到绿色出口才能通关。\n钥匙会自动开启封印门；放置炸弹后经过三个行动阶段爆炸，可炸墙、击倒守卫，也可能炸伤自己。\n守卫每三回合移动一次，受到伤害后短暂受保护。\n黑暗区域需要靠近才能看见；撞墙或尝试无效动作也会消耗回合。\n手机可使用屏幕底部的方向键、炸弹和等待按钮。\n成功撤离后，宝石越多、生命与回合剩余越多，得分越高。",
- stats:"手机：屏幕底部方向键 / 炸弹 / 等待　·　电脑：WASD、空格、Q 和 R",
+ stats:"手机：屏幕底部方向键 / 炸弹 / 等待　·　电脑：WASD、空格、Q 和 R　·　地图总览可随时回顾探索区域",
  primary:"继续冒险",secondary:"选择教程",onSecondary:()=>{showTab("tutorial");document.getElementById("library").scrollIntoView({behavior:"smooth"})}});
 }
 function levelById(id){return byId.get(id)||((active&&active.id===id)?active.spec:null)}
@@ -344,6 +345,7 @@ function updateMobileControls(){
  document.body.classList.toggle("mobile-play-active",visible);
 }
 function register(){
+ $("openMap").onclick=()=>{if(game&&!modalOpen)mapOverview.open(game)};
  $("help").onclick=info;
  $("jumpLevels").onclick=()=>{$("library").scrollIntoView({behavior:"smooth"})};
  window.addEventListener("scroll",updateMobileControls,{passive:true});
@@ -365,6 +367,10 @@ function register(){
  document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
  document.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>onAction(b.dataset.action));
  document.addEventListener("keydown",e=>{
+  if(mapOverview.isOpen()){
+   if(e.key==="Escape"||e.key==="m"||e.key==="M"){e.preventDefault();mapOverview.close()}
+   return;
+  }
   if(["INPUT","SELECT","TEXTAREA"].includes(document.activeElement?.tagName)||e.ctrlKey||e.altKey||e.metaKey)return;
   if(e.key==="Escape"&&modalOpen){closeModal();return}
   if(modalOpen)return;
@@ -373,6 +379,7 @@ function register(){
    " ":"bomb",q:"wait",Q:"wait"};
   if(map[e.key]){e.preventDefault();onAction(map[e.key])}
   else if(e.key==="r"||e.key==="R"){e.preventDefault();restart()}
+  else if(e.key==="m"||e.key==="M"){e.preventDefault();if(game&&!modalOpen)mapOverview.open(game)}
  });
 }
 register();
